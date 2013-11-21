@@ -60,16 +60,16 @@ def reverseBwt(bw):
         rowi = first[c][0] + ranks[rowi]
     return t
 
-def getSAIndex(bw, i, sa, a, ranks, tots):
+def getSAIndex(fm, i, a, alphabet):
+    (first, last, sa, checkpoints) = fm
     ''' Returns the index in the full SA of the given index i in the bw transform, using the given subsampled SA '''
     if (i+1) % a == 0:
         return sa[(i+1)/a - 1]
     else:
-        first = firstCol(tots)
-        newi = first[bw[i]][0] + ranks[i]
-        return 1 + getSAIndex(bw, newi, sa, a, ranks, tots)
+        newi = first[last[i]][0] + getCount(last, i, checkpoints, b, alphabet)
+        return (1 + getSAIndex(fm, newi, a, alphabet)) % len(last)
 
-def checkpoints(bw, b, alphabet):
+def getCheckpoints(bw, b, alphabet):
     ''' Returns counts of each letter at every b positions in the bw string '''
     counts = dict()
     for l in alphabet:
@@ -88,78 +88,84 @@ def getCount(bw, i, checkpoints, b, alphabet):
     prevC = i - ((i+1) % b)
     nextC = prevC+b
     if i == prevC:
-        return checkpoints[(i+1)/b - 1][alphabet.index(bw[i])] - 1
+        return int(checkpoints[(i+1)/b - 1][alphabet.index(bw[i])]) - 1
     elif prevC > -1 and (nextC > len(bw) or (i - prevC) < (nextC - i)):
-        count = checkpoints[(i+1)/b - 1][alphabet.index(bw[i])]
+        count = int(checkpoints[(i+1)/b - 1][alphabet.index(bw[i])])
         for x in bw[prevC+1:i]:
             if x == bw[i]:
                 count += 1
         return count
     else:
-        count = checkpoints[(i+1)/b][alphabet.index(bw[i])]
+        count = int(checkpoints[(i+1)/b][alphabet.index(bw[i])])
         for x in bw[(i+1):(nextC+1)]:
             if x == bw[i]:
                 count -= 1
         return count-1
 
-def findRange(bw, sa, a, ranks, tots, checkpoints, b, substring, start, end):
-    alphabet = sorted(tots.keys())
-
-    print 'Finding ' + substring
-    print str(start) + ' - ' + str(end)
-    print '\n'
+def findRange(fm, a, b, substring, start, end):
+    (first, last, sa, checkpoints) = fm
+    alphabet = sorted(first.keys())
 
     if len(substring) < 1:
         print 'Error: substring must have length >= 1'
         return []
-    else: 
-        index = 0
-        for c in alphabet:
-            if c == substring[-1]:
-                if len(substring) == 1:
-                    matches = []
-                    for i in xrange(index+start, index+end+1):
-                        matches.append(getSAIndex(bw, i, sa, a, ranks, tots))
-                    return sorted(matches)
-                else:
-                    minId = tots[c]
-                    maxId = 0
-                    for i in xrange(index+start, index+end+1):
-                        if bw[i] == substring[-2]:
-                            currId  = getCount(bw, i, checkpoints, b, alphabet)
-                            if currId < minId:
-                                minId = currId
-                            if currId > maxId:
-                                maxId = currId
-                    if minId > maxId:
-                        print 'No matches found!'
-                        return []
-                    else:
-                        return findRange(bw, sa, a, ranks, tots, checkpoints, b, substring[:-1], int(minId), int(maxId))
+    else:
+        startId = first[substring[-1]][0] + start
+        endId = first[substring[-1]][0] + end
+        if len(substring) == 1:
+            matches = []
+            for i in xrange(startId, endId):
+                matches.append(getSAIndex(fm, i, a, alphabet))
+            return sorted(matches)
+        else:
+            minId = end-start
+            maxId = 0
+            for i in xrange(startId, endId):
+                if last[i] == substring[-2]:
+                    currId  = getCount(last, i, checkpoints, b, alphabet)
+                    if currId < minId:
+                        minId = currId
+                    if currId > maxId:
+                        maxId = currId
+            if minId > maxId:
+                return []
             else:
-                index += tots[c]
+                return findRange(fm, a, b, substring[:-1], int(minId), int(maxId)+1)
 
-def find(bw, sa, a, ranks, tots, checkpoints, b, substring):
+def find(fm, a, b, substring):
     ''' Find all indexes of the substring in the text represented in bw '''
-    return findRange(bw, sa, a, ranks, tots, checkpoints, b, substring, 0, tots[substring[-1]]-1)
+    first = fm[0]
+    (minI, maxI) = first[substring[-1]]
+    return findRange(fm, a, b, substring, 0, maxI-minI)
 
 def insert(index, c):
     ''' Update the BWT for an insertion of character c into position index in the original string '''
 
 
 t = 'TTAGCCAATGGAATGGAAGCCGAT$'
-query = 'AGCC'
+query1 = 'AGCC'
+query2 = 'AAT'
+query3 = 'ACGTA'
 alphabet = sorted(set(t))
 
-a = 1
-last, sa = bwtViaBwm(t, a)
-ranks, tots = rankBwt(last)
-
-print sa
-
+a = 3
 b = 4
-cp = checkpoints(last, b, alphabet)
+last, sa = bwtViaBwm(t, a)
+_, tots = rankBwt(last)
+first = firstCol(tots)
+checkpoints = getCheckpoints(last, b, alphabet)
+fm = (first, last, sa, checkpoints)
 
-matches = find(last, sa, a, ranks, tots, cp, b, query)
-print t
+print 'T = ' + t
+print 'Searching for: ' + query1
+matches = find(fm, a, b, query1)
 print matches
+
+print 'Searching for: ' + query2
+matches = find(fm, a, b, query2)
+print matches
+
+print 'Searching for: ' + query3
+matches = find(fm, a, b, query3)
+print matches
+
