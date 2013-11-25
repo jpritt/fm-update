@@ -276,8 +276,7 @@ def delete(fm, index):
         if sa[i] >= index:
             sa[i] -= 1
 
-    if row > delRow:
-        row -= 1
+    row -= 1
 
     # Update first column
     for k in alphabet:
@@ -291,13 +290,12 @@ def delete(fm, index):
         checkpoints = checkpoints[:-1]
 
     # Update checkpoints        
-    # STILL NOT WORKING 
     indexMoved = alphabet.index(tempC)
     indexRemoved = alphabet.index(remC)    
-    for x in xrange(row + b - (row%b+1), len(last), b):
-        checkpoints[(x+1) / b - 1][indexRemoved] -= 1
     for x in xrange(delRow + b - (delRow%b+1), len(last), b):
-        checkpoints[(x+1) / b - 1][alphabet.index(last[x])] += 1
+        checkpoints[(x+1) / b - 1][indexRemoved] -= 1
+    for x in xrange(row + b - (row%b+1), len(last)-1, b):
+        checkpoints[(x+1) / b - 1][alphabet.index(last[x+1])] += 1
     if row < delRow:
         for x in xrange(row + b - (row%b+1), delRow, b):
             checkpoints[(x+1) / b - 1][indexMoved] += 1
@@ -314,17 +312,16 @@ def delete(fm, index):
 
     fm = (first, last, sa, checkpoints)
 
-    if index > 0:
-        j = sa.index(index-1)
-        j2 = LF(fm, row)
-        while not j == j2:
-            print str(j) + '-->' + str(j2)
-            newJ = LF(fm, j)
-            fm = moveRow(fm, j, j2)
+    j = sa.index(index-1)
+    j2 = LF(fm, row)
+    while not j == j2:
+        print str(j) + '-->' + str(j2)
+        newJ = LF(fm, j)
+        fm = moveRow(fm, j, j2)
         
-            j = newJ
-            j2 = LF(fm, j2)
-        print str(j) + ' = ' + str(j2)
+        j = newJ
+        j2 = LF(fm, j2)
+    print str(j) + ' = ' + str(j2)
 
     return fm 
 
@@ -345,14 +342,14 @@ def constructFM(t, b):
    
 
 
-for n in xrange(100):
+for n in xrange(1):
     print 'Test ' + str(n+1)
     #length = random.randint(30,50)
-    length = random.randint(10,15)
+    length = 10
     t = ['$']
     for i in range(length):
         t = [random.choice(['A', 'C', 'T', 'G'])] + t
-    #t = 'CGCGGCGGATGTGTA$'
+    #t = 'GCTAGAGTAT$'
     print '  ' + ''.join(t)
 
     alphabet = ['$', 'A', 'C', 'G', 'T']
@@ -367,8 +364,8 @@ for n in xrange(100):
 
     #insertId = random.randint(0,length)
     #newChar = random.choice(['A', 'C', 'T', 'G'])
-    deleteId = random.randint(0,length-1)
-    #deleteId = 2
+    deleteId = random.randint(0,length)
+    #deleteId = 6
 
     #t2 = t[:insertId] + [newChar] + t[insertId:]
     t2 = t[:deleteId] + t[deleteId+1:]
