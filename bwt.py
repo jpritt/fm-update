@@ -246,7 +246,7 @@ def insert(fm, index, c):
     if index > 0:
         j = sa.index(index-1)
 
-       j2 = LF(fm, newRow)
+        j2 = LF(fm, newRow)
         while not j == j2:
             newJ = LF(fm, j)
             fm = moveRow(fm, j, j2)
@@ -257,13 +257,12 @@ def insert(fm, index, c):
     return fm 
 
 def delete(fm, index):
-    # DO THIS
     ''' Update the BWT for a deletion of a character from position index in the original string '''
     (first, last, sa, checkpoints) = fm
 
     # Update old row
-    row = sa.index(index)
-    delRow = LF(row)
+    row = sa.index(index+1)
+    delRow = LF(fm, row)
     remC = last[row]
     tempC = last[delRow]
     last[row] = tempC
@@ -284,39 +283,35 @@ def delete(fm, index):
         elif k > remC:
             first[k] = (first[k][0]-1, first[k][1]-1)
 
-    # update checkpoints        
-    # Add new checkpoint row
+    # Remove last checkpoint row
     if (len(last)+1) % b == 0:
         checkpoints = checkpoints[:-1]
 
+    # Update checkpoints        
     indexMoved = alphabet.index(tempC)
-    indexRemoved = alphabet.index(remC)
-    for x in xrange(b-1, len(last), b):
-        if x >= delRow and x < row-1:
-            checkpoints[(x+1) / b - 1][indexRemoved] -= 1
+    indexRemoved = alphabet.index(remC)    
     for x in xrange(row + b - (row%b+1), len(last), b):
-        checkpoints[(x+1) / b - 1][indexAdded] += 1
         checkpoints[(x+1) / b - 1][indexRemoved] -= 1
+    for x in xrange(delRow + b - (delRow%b+1), len(last)-1, b):
+        checkpoints[(x+1) / b - 1][alphabet.index(last[x+1])] += 1
+    if row < delRow:
+        for x in xrange(row + b - (row%b+1), delRow, b):
+            checkpoints[(x+1) / b - 1][indexMoved] += 1
+    else:
+        for x in xrange(delRow + b - (delRow%b+1), row, b):
+            checkpoints[(x+1) / b - 1][indexMoved] -= 1
 
-    # Update checkpoints
-    indexRemoved = alphabet.index(tempC)
-    for x in xrange(newRow + b - (newRow%b+1), len(last)-1, b):
-        checkpoints[(x+1) / b - 1][indexRemoved] += 1
-        checkpoints[(x+1) / b - 1][alphabet.index(last[x+1])] -= 1
 
-    # Rearrange rows that are now out of order
     fm = (first, last, sa, checkpoints)
 
-    #j = getRowBySA(fm, index-1, a, alphabet)
-    if index > 0:
-        j = sa.index(index-1)
-        j2 = LF(fm, newRow)
-        while not j == j2:
-            newJ = LF(fm, j)
-            fm = moveRow(fm, j, j2)
+    j = sa.index(index-1)
+    j2 = LF(fm, row)
+    while not j == j2:
+        newJ = LF(fm, j)
+        fm = moveRow(fm, j, j2)
         
-            j = newJ
-            j2 = LF(fm, j2)
+        j = newJ
+        j2 = LF(fm, j2)
 
     return fm 
 
@@ -334,9 +329,10 @@ def constructFM(t, b):
     first = firstCol(tots)
     checkpoints = getCheckpoints(last, b)
     return (first, last, sa, checkpoints)
-    
+   
 
-for n in xrange(1):
+
+for n in xrange(1000):
     print 'Test ' + str(n+1)
     length = random.randint(30,50)
     t = ['$']
@@ -353,7 +349,7 @@ for n in xrange(1):
 
     #insertId = random.randint(0,length)
     #newChar = random.choice(['A', 'C', 'T', 'G'])
-    deleteId = randomint(0,length)
+    deleteId = random.randint(0,length)
 
     #t2 = t[:insertId] + [newChar] + t[insertId:]
     t2 = t[:deleteId] + t[deleteId+1:]
@@ -361,12 +357,12 @@ for n in xrange(1):
 
     fm2 = constructFM(t2,b)
 
-    fm_new = delete(fm, deleteId, newChar)
+    fm_new = delete(fm, deleteId)
 
-    for i in xrange(len(fm2[1])):
-        print fm2[1][i] + '\t' + str(fm2[2][i]) + '\t' + fm_new[1][i] + '\t' + str(fm_new[2][i])
+#    for i in xrange(len(fm2[1])):
+#        print fm2[1][i] + '\t' + str(fm2[2][i]) + '\t' + fm_new[1][i] + '\t' + str(fm_new[2][i])
 
-'''
+
     for i in xrange(len(fm2[0])):
         if not fm_new[2][i] == fm2[2][i]:
             print 'Error!'
@@ -384,8 +380,8 @@ for n in xrange(1):
             for x in xrange(len(fm2[0])):
                 print fm2[0][x] + '\t' + str(fm2[2][x]) + '\t' + fm_new[0][x] + '\t' + str(fm_new[2][x])
             exit()
-'''
-#print 'All correct!'
+
+print 'All correct!'
 
 
 '''
