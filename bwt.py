@@ -92,7 +92,7 @@ def reverseBwt(bw):
 #    return row
 
 
-def getCheckpoints(bw, b):
+def getCheckpoints(bw, b, alphabet):
     ''' Returns counts of each letter at every b positions in the bw string '''
     counts = dict()
     for l in alphabet:
@@ -106,7 +106,7 @@ def getCheckpoints(bw, b):
                 checkpoints[i/b][alphabet.index(k)] = v
     return checkpoints
    
-def getCount(bw, i, checkpoints, b):
+def getCount(bw, i, checkpoints, b, alphabet):
     '''Find the b-index of the character at the given position in the burrows-wheeler transform'''
     prevC = i - ((i+1) % b)
     nextC = prevC+b
@@ -126,7 +126,7 @@ def getCount(bw, i, checkpoints, b):
                 count -= 1
         return count
 
-def findRange(fm, b, substring, start, end):
+def findRange(fm, b, alphabet, substring, start, end):
     (first, last, sa, checkpoints) = fm
     alphabet = sorted(first.keys())
 
@@ -146,7 +146,7 @@ def findRange(fm, b, substring, start, end):
             maxId = 0
             for i in xrange(startId, endId):
                 if last[i] == substring[-2]:
-                    currId  = getCount(last, i, checkpoints, b)
+                    currId  = getCount(last, i, checkpoints, b, alphabet)
                     if currId < minId:
                         minId = currId
                     if currId > maxId:
@@ -154,9 +154,9 @@ def findRange(fm, b, substring, start, end):
             if minId > maxId:
                 return []
             else:
-                return findRange(fm, b, substring[:-1], int(minId), int(maxId)+1)
+                return findRange(fm, b, alphabet, substring[:-1], int(minId), int(maxId)+1)
 
-def moveRow(fm, i, j):
+def moveRow(fm, b, alphabet, i, j):
     ''' Moves the row from i to j, shifting all rows in-between and updates SA and checkpoints '''
     (first, last, sa, checkpoints) = fm
     if i > j:
@@ -183,13 +183,13 @@ def moveRow(fm, i, j):
             checkpoints[(x+1) / b - 1][alphabet.index(last[x])] += 1
     return (first, last, sa, checkpoints)
 
-def find(fm, b, substring):
+def find(fm, b, alphabet, substring):
     ''' Find all indexes of the substring in the text represented in bw '''
     first = fm[0]
     (minI, maxI) = first[substring[-1]]
-    return findRange(fm, b, substring, 0, maxI-minI)
+    return findRange(fm, b, alphabet, substring, 0, maxI-minI)
 
-def insert(fm, index, c):
+def insert(fm, b, alphabet, index, c):
     ''' Update the BWT for an insertion of character c into position index in the original string '''
     (first, last, sa, checkpoints) = fm
 
@@ -214,7 +214,7 @@ def insert(fm, index, c):
 
 
     # Add new row
-    bVal = getCount(last, row, checkpoints, b)
+    bVal = getCount(last, row, checkpoints, b, alphabet)
 
     newRow = first[c][0] + bVal
     last = last[:newRow] + [tempC] + last[newRow:]
@@ -246,23 +246,23 @@ def insert(fm, index, c):
     if index > 0:
         j = sa.index(index-1)
 
-        j2 = LF(fm, newRow)
+        j2 = LF(fm, b, alphabet, newRow)
         while not j == j2:
-            newJ = LF(fm, j)
-            fm = moveRow(fm, j, j2)
+            newJ = LF(fm, b, alphabet, j)
+            fm = moveRow(fm, b, alphabet, j, j2)
         
             j = newJ
-            j2 = LF(fm, j2)
+            j2 = LF(fm, b, alphabet, j2)
 
     return fm 
 
-def delete(fm, index):
+def delete(fm, b, alphabet, index):
     ''' Update the BWT for a deletion of a character from position index in the original string '''
     (first, last, sa, checkpoints) = fm
 
     # Update old row
     row = sa.index(index+1)
-    delRow = LF(fm, row)
+    delRow = LF(fm, b, alphabet, row)
     remC = last[row]
     tempC = last[delRow]
     last[row] = tempC
@@ -276,11 +276,8 @@ def delete(fm, index):
         if sa[i] >= index:
             sa[i] -= 1
 
-    if row > delRow:
-        row -= 1
-
     # Update first column
-    for k in alphabet:
+    for k in first.keys():
         if k == remC:
             first[k] = (first[k][0], first[k][1]-1)
         elif k > remC:
@@ -291,7 +288,6 @@ def delete(fm, index):
         checkpoints = checkpoints[:-1]
 
     # Update checkpoints        
-    # STILL NOT WORKING 
     indexMoved = alphabet.index(tempC)
     indexRemoved = alphabet.index(remC)    
     for x in xrange(row + b - (row%b+1), len(last), b):
@@ -305,105 +301,199 @@ def delete(fm, index):
         for x in xrange(delRow + b - (delRow%b+1), row, b):
             checkpoints[(x+1) / b - 1][indexMoved] -= 1
 
-    print ''
-    print checkpoints
+    if row > delRow:
+        row -= 1
 
-    print row
-    for i in xrange(len(last)):
-        print last[i] + '\t' + str(sa[i])
 
     fm = (first, last, sa, checkpoints)
 
     if index > 0:
         j = sa.index(index-1)
-        j2 = LF(fm, row)
+        j2 = LF(fm, b, alphabet, row)
         while not j == j2:
-            print str(j) + '-->' + str(j2)
-            newJ = LF(fm, j)
-            fm = moveRow(fm, j, j2)
+            newJ = LF(fm, b, alphabet, j)
+            fm = moveRow(fm, b, alphabet, j, j2)
         
             j = newJ
-            j2 = LF(fm, j2)
-        print str(j) + ' = ' + str(j2)
+            j2 = LF(fm, b, alphabet, j2)
 
     return fm 
 
+def substitute(fm, b, alphabet, index, c):
+    ''' Update the BWT for a substitution of a new character at position index in the original string '''
+    (first, last, sa, checkpoints) = fm
 
-def LF(fm, index):
+    # Update old row
+    row = sa.index(index+1)
+    remC = last[row]
+    nextRow = LF(fm, b, alphabet, row)
+    last[row] = c
+    
+    # Update first column
+    for k in first.keys(): 
+        if k == remC:
+            first[k] = (first[k][0], first[k][1]-1)
+        if k == c:
+            first[k] = (first[k][0], first[k][1]+1)
+        if k > remC and k <= c:
+            first[k] = (first[k][0]-1, first[k][1]-1)
+        if k > c and k <= remC:
+            first[k] = (first[k][0]+1, first[k][1]+1)
+
+    # Update checkpoints        
+    indexAdded = alphabet.index(c)
+    indexRemoved = alphabet.index(remC)    
+    for x in xrange(row + b - (row%b+1), len(last), b):
+        checkpoints[(x+1) / b - 1][indexAdded] += 1
+        checkpoints[(x+1) / b - 1][indexRemoved] -= 1
+
+    # New row index for next row
+    newRowPos = LF(fm, b, alphabet, row)
+    fm = moveRow((first, last, sa, checkpoints), b, alphabet, nextRow, newRowPos)
+
+    if index > 0:
+        j = fm[2].index(index-1)
+        j2 = LF(fm, b, alphabet, newRowPos)
+        while not j == j2:
+            newJ = LF(fm, b, alphabet, j)
+            fm = moveRow(fm, b, alphabet, j, j2)
+       
+            j = newJ
+            j2 = LF(fm, b, alphabet, j2)
+
+    return fm 
+
+def LF(fm, b, alphabet, index):
     ''' Step forward one step in the bwt and return the next row '''
     (first, last, sa, checkpoints) = fm
 
     c = last[index]
-    return (first[c][0] + getCount(last, index, checkpoints, b)) % len(last)
+    return (first[c][0] + getCount(last, index, checkpoints, b, alphabet)) % len(last)
 
-def constructFM(t, b):
+def constructFM(t, b, alphabet):
     last, sa = bwtViaBwm(t)
     _, tots = rankBwt(last)
     first = firstCol(tots)
-    checkpoints = getCheckpoints(last, b)
+    checkpoints = getCheckpoints(last, b, alphabet)
     return (first, last, sa, checkpoints)
-   
+
+def findApproximatePigeonhole(fm, t, b, alphabet, substring, k):
+    ''' Uses the pigeonhole principle to find all matches of the substring to the fm index with at most k errors '''
+    matches = []
+
+    # Pigeonhole principle
+    if k == 0:
+        matches = find(fm, b, alphabet, substring)
+        return [(m, []) for m in matches]
+    else:
+        fragLen = len(substring) / (k+1)
+        for i in xrange(k+1):
+            tsub = substring[len(substring)*i/(k+1) : len(substring)*(i+1)/(k+1)]
+            print 'Searching for ' + tsub
+            subMatches = find(fm, b, alphabet, tsub)
+
+            for m in subMatches:
+                start = m - len(substring)*i/k
+                edits = editDistance(t[start:start+len(substring)], substring)
+                if len(edits) <= k:
+                    matches.append((m, edits))
+        return matches
+
+def findApproximate(fm, b, alphabet, substring, k):
+    ''' Find all approximate matches to the fm index by making all possible mutated strings and searching for exact matches '''
+    variations = [substring]
+    for i in xrange(k):
+        tempV = []
+        for v in variations:
+            for e in makeEdits(v):
+                if not e in tempV:
+                    tempV += [e]
+        variations = tempV
+
+    for v in variations:
+        matches = find(fm, b, alphabet, v)
+        
+
+def makeEdits(t):
+    ''' Returns all strings at edit distance 1 from t '''
+    variations = []
+    variations += [t]
+    chars = ['A', 'C', 'G', 'T']    
+
+    # deletions
+    for i in xrange(len(t)):
+        s = t[:i] + t[i+1:]
+        if not s in variations:
+            variations += [s]
+
+    # insertions
+    for i in xrange(len(t)+1):
+        for c in chars:
+            s = t[:i] + c + t[i:]
+            if not s in variations:
+                variations += [s]
+
+    # substitutions
+    for i in xrange(len(t)):
+        for c in chars:
+            s = t[:i] + c + t[i+1:]
+            if not s in variations:
+                variations += [s]
+
+    return variations
+
+def editDistance(t1, t2):
+    ''' Return the minimal sequence of edits to get from t1 to t2 '''
+    m = np.zeros([len(t2)+1, len(t1)+1])
+    for i in xrange(len(t1)):
+        m[0][i+1] = i+1
+    for i in xrange(len(t2)):
+        m[i+1][0] = i+1
+
+    for x in xrange(len(t2)):
+        for y in xrange(len(t1)):
+            match = 0 if t2[x] == t1[y] else 1
+            m[x+1][y+1] = min(m[x][y+1]+1, m[x+1][y]+1, m[x][y]+match)
+
+#    print m
+
+    return editSeq(m, t1, t2)
+
+def editSeq(m, t1, t2):
+    ''' Return the sequence of edits that corresponds to the matrix m '''
+    x = len(m) - 1
+    y = len(m[0]) - 1
+    edits = []
+
+    while x > 0 and y > 0:
+#        print '(' + str(x) + ', ' + str(y) + ')'
+        match = 0 if t2[x-1] == t1[y-1] else 1
+        if m[x][y] == m[x-1][y-1] + match:
+            if not t2[x-1] == t1[y-1]:
+                edits = [('sub', y-1, t2[x-1])] + edits
+            x -= 1
+            y -= 1
+        elif m[x][y] == m[x-1][y] + 1:
+            edits = [('ins', x-1, t2[x-1])] + edits
+            x -= 1
+        else:
+            edits = [('del', y-1)] + edits
+            y -= 1
+
+    if y > 0:
+        while y > 0:
+            edits = [('del', y-1)] + edits
+            y -= 1
+    else:
+        while x > 0:
+            edits = [('ins', x, t2[x-1])] + edits
+            x -= 1
+    return edits
 
 
-for n in xrange(100):
-    print 'Test ' + str(n+1)
-    #length = random.randint(30,50)
-    length = random.randint(10,15)
-    t = ['$']
-    for i in range(length):
-        t = [random.choice(['A', 'C', 'T', 'G'])] + t
-    #t = 'CGCGGCGGATGTGTA$'
-    print '  ' + ''.join(t)
-
-    alphabet = ['$', 'A', 'C', 'G', 'T']
-    b = 3
 
 
-    fm = constructFM(t, b)
-
-    for i in xrange(len(fm[1])):
-        print fm[1][i] + '\t' + str(fm[2][i])
-    print ''
-
-    #insertId = random.randint(0,length)
-    #newChar = random.choice(['A', 'C', 'T', 'G'])
-    deleteId = random.randint(0,length-1)
-    #deleteId = 2
-
-    #t2 = t[:insertId] + [newChar] + t[insertId:]
-    t2 = t[:deleteId] + t[deleteId+1:]
-    print '  ' + ''.join(t2)
-
-    fm2 = constructFM(t2,b)
-
-    fm_new = delete(fm, deleteId)
-
-#    for i in xrange(len(fm2[1])):
-#        print fm2[1][i] + '\t' + str(fm2[2][i]) + '\t' + fm_new[1][i] + '\t' + str(fm_new[2][i])
-
-
-    for i in xrange(len(fm2[0])):
-        if not fm_new[2][i] == fm2[2][i]:
-            print 'Error!'
-            print fm2[0]
-            print fm2[1]
-            print fm2[2]
-            print fm2[3]
-
-            print ''
-            print fm_new[0]
-            print fm_new[1]
-            print fm_new[2]
-            print fm_new[3]
-            
-            for x in xrange(len(fm2[0])):
-                print fm2[0][x] + '\t' + str(fm2[2][x]) + '\t' + fm_new[0][x] + '\t' + str(fm_new[2][x])
-            exit()
-
-print 'All correct!'
-
-
-'''
+'''  
 t = 'TTAGCCAATGGAATGGAAGCCGAT$'
 query1 = 'AGCC'
 query2 = 'AAT'
