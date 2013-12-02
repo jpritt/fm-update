@@ -7,16 +7,18 @@ import time
 
 def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters):
     unmatched = [1]*len(reads)
+    numUnmatched = len(reads)
     prevSize = 2*len(reads)
     currIter = 0
 
+    firstIter = True
+    initialAcc = 0.0
     correct = 0
     incorrect = 0
-    while sum(unmatched) > 0 and currIter < maxIters and float(prevSize - sum(unmatched)) / prevSize > 0.1:
+    while numUnmatched > 0 and currIter < maxIters and float(prevSize - numUnmatched) / prevSize > 0.1:
 
         currIter += 1
-        print "Iter " + str(currIter) + ", " + str(len(reads)-sum(unmatched)) + " / " + str(len(reads)) + " reads matched - " + str(correct) + " correct, " + str(incorrect) + " incorrect"
-        prevSize = sum(unmatched)
+        prevSize = numUnmatched
     
         # Match reads against t2
         mutations = dict()
@@ -47,6 +49,10 @@ def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters):
                     if not found:
                         incorrect += 1
 
+        if firstIter:
+            firstIter = False
+            initialAcc = float(correct) / len(reads)
+
         # apply mutations to fm index
         for k,v in mutations.items():
             if v >= 1:
@@ -62,8 +68,10 @@ def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters):
                     for i in xrange(len(starts)):
                         if starts[i] >= k[1]:
                             starts[i] -= 1
-        print 'Unmatched: ' + str(sum(unmatched))
+ 
+        numUnmatched = sum(unmatched)
+        print "    Iter " + str(currIter) + " - " + str(correct) + " correct, " + str(incorrect) + " incorrect, " + str(len(reads)-correct-incorrect) + ' unmatched'
 
-    print "Final: " + str(correct) + " correct, " + str(incorrect) + " incorrect, " + str(len(reads)-correct-incorrect) + " unmatched"
-    print "Accuracy: " + str(float(correct) / len(reads))
-    return float(correct) / len(reads)
+
+    #print "    Accuracy: " + str(float(correct) / len(reads))
+    return initialAcc, float(correct) / len(reads)

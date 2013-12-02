@@ -1,0 +1,71 @@
+Read len: 10
+  Run 0
+    Iter 1 - 495 correct, 3 incorrect, 2 unmatched
+    Iter 2 - 496 correct, 3 incorrect, 1 unmatched
+    Iter 3 - 496 correct, 3 incorrect, 1 unmatched
+  Run 1
+    Iter 1 - 494 correct, 3 incorrect, 3 unmatched
+    Iter 2 - 494 correct, 3 incorrect, 3 unmatched
+  Run 2
+    Iter 1 - 495 correct, 1 incorrect, 4 unmatched
+    Iter 2 - 495 correct, 1 incorrect, 4 unmatched
+  Run 3
+    Iter 1 - 494 correct, 2 incorrect, 4 unmatched
+    Iter 2 - 494 correct, 2 incorrect, 4 unmatched
+  Run 4
+    Iter 1 - 498 correct, 1 incorrect, 1 unmatched
+    Iter 2 - 499 correct, 1 incorrect, 0 unmatched
+  Run 5
+    Iter 1 - 496 correct, 0 incorrect, 4 unmatched
+    Iter 2 - 496 correct, 0 incorrect, 4 unmatched
+  Run 6
+    Iter 1 - 490 correct, 0 incorrect, 10 unmatched
+    Iter 2 - 490 correct, 0 incorrect, 10 unmatched
+  Run 7
+    Iter 1 - 494 correct, 1 incorrect, 5 unmatched
+    Iter 2 - 495 correct, 1 incorrect, 4 unmatched
+    Iter 3 - 495 correct, 1 incorrect, 4 unmatched
+  Run 8
+    Iter 1 - 495 correct, 0 incorrect, 5 unmatched
+    Iter 2 - 495 correct, 0 incorrect, 5 unmatched
+  Run 9
+    Iter 1 - 499 correct, 0 incorrect, 1 unmatched
+    Iter 2 - 499 correct, 0 incorrect, 1 unmatched
+  Avg naive accuracy:     0.99
+  Avg iterative accuracy: 0.9906
+Read len: 20
+  Run 0
+    Iter 1 - 478 correct, 0 incorrect, 22 unmatched
+    Iter 2 - 478 correct, 0 incorrect, 22 unmatched
+  Run 1
+    Iter 1 - 474 correct, 0 incorrect, 26 unmatched
+    Iter 2 - 477 correct, 0 incorrect, 23 unmatched
+    Iter 3 - 477 correct, 0 incorrect, 23 unmatched
+  Run 2
+    Iter 1 - 479 correct, 0 incorrect, 21 unmatched
+    Iter 2 - 480 correct, 0 incorrect, 20 unmatched
+  Run 3
+    Iter 1 - 480 correct, 0 incorrect, 20 unmatched
+    Iter 2 - 481 correct, 0 incorrect, 19 unmatched
+  Run 4
+    Iter 1 - 473 correct, 0 incorrect, 27 unmatched
+    Iter 2 - 473 correct, 0 incorrect, 27 unmatched
+  Run 5
+    Iter 1 - 475 correct, 0 incorrect, 25 unmatched
+    Iter 2 - 478 correct, 0 incorrect, 22 unmatched
+    Iter 3 - 478 correct, 0 incorrect, 22 unmatched
+  Run 6
+    Iter 1 - 467 correct, 0 incorrect, 33 unmatched
+    Iter 2 - 468 correct, 0 incorrect, 32 unmatched
+  Run 7
+    Iter 1 - 457 correct, 0 incorrect, 43 unmatched
+    Iter 2 - 462 correct, 0 incorrect, 38 unmatched
+    Iter 3 - 463 correct, 0 incorrect, 37 unmatched
+  Run 8
+    Iter 1 - 477 correct, 0 incorrect, 23 unmatched
+    Iter 2 - 477 correct, 0 incorrect, 23 unmatched
+  Run 9
+    Iter 1 - 480 correct, 0 incorrect, 20 unmatched
+    Iter 2 - 480 correct, 0 incorrect, 20 unmatched
+  Avg naive accuracy:     0.948
+  Avg iterative accuracy: 0.951

@@ -445,22 +445,22 @@ def makeEdits(t):
     for i in xrange(len(t)):
         s = t[:i] + t[i+1:]
         if not s in variations:
-            #variations[s] = [('del', i)]
-            variations[s] = ('del', i)
+            #variations[s] = ('del', i)
+            variations[s] = ('ins', i, t[i])
         else:
-            #variations[s] += [('del', i)]
-            variations[s] = min(variations[s], ('del', i))
+            #variations[s] = min(variations[s], ('del', i))
+            variations[s] = min(variations[s], ('ins', i, t[i]))
 
     # insertions
     for i in xrange(len(t)+1):
         for c in chars:
             s = t[:i] + c + t[i:]
             if not s in variations:
-                #variations[s] = [('ins', i, c)]
-                variations[s] = ('ins', i, c)
+                #variations[s] = ('ins', i, c)
+                variations[s] = ('del', i)
             else:
-                #variations[s] += [('ins', i, c)]
-                variations[s] = min(variations[s], ('ins', i, c))
+                #variations[s] = min(variations[s], ('ins', i, c))
+                variations[s] = min(variations[s], ('del', i))
 
     # substitutions
     for i in xrange(len(t)):
@@ -468,11 +468,11 @@ def makeEdits(t):
             if not c == t[i]:
                 s = t[:i] + c + t[i+1:]
                 if not s in variations:
-                    #variations[s] = [('sub', i, c)]
-                    variations[s] = ('sub', i, c)
+                    #variations[s] = ('sub', i, c)
+                    variations[s] = ('sub', i, t[i])
                 else:
-                    #variations[s] += [('sub', i, c)]
-                    variations[s] += min(variations[s], ('sub', i, c))
+                    #variations[s] += min(variations[s], ('sub', i, c))
+                    variations[s] += min(variations[s], ('sub', i, t[i]))
 
     return variations
 
