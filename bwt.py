@@ -401,44 +401,78 @@ def findApproximatePigeonhole(fm, t, b, alphabet, substring, k):
 
 def findApproximate(fm, b, alphabet, substring, k):
     ''' Find all approximate matches to the fm index by making all possible mutated strings and searching for exact matches '''
-    variations = [substring]
+    variations = dict()
+    variations[substring] = []
     for i in xrange(k):
-        tempV = []
-        for v in variations:
-            for e in makeEdits(v):
-                if not e in tempV:
-                    tempV += [e]
-        variations = tempV
+        # first check if any of the current strings match
+        matches = dict()
+        for k,v in variations.items():
+            for m in find(fm, b, alphabet, k):
+                if m in matches:
+                    matches[m] += k
+                else:
+                    matches[m] = v
+        if len(matches) > 0:
+            return matches          
 
-    for v in variations:
-        matches = find(fm, b, alphabet, v)
-        
+        newV = dict()
+        for v in variations:
+            for var,edit in makeEdits(v).items():
+                e = variations[v] + [edit]
+                if not var in newV:
+                    newV[var] = e
+                else:
+                    newV[var] = min(newV[var], e)
+        variations = newV
+
+    matches = dict()
+    for v,k in variations.items():
+        for m in find(fm, b, alphabet, v):
+            if m in matches:
+                matches[m] += k
+            else:
+                matches[m] = k
+    return matches          
+
 
 def makeEdits(t):
     ''' Returns all strings at edit distance 1 from t '''
-    variations = []
-    variations += [t]
+    variations = dict()
+    #variations += [t]
     chars = ['A', 'C', 'G', 'T']    
 
     # deletions
     for i in xrange(len(t)):
         s = t[:i] + t[i+1:]
         if not s in variations:
-            variations += [s]
+            #variations[s] = [('del', i)]
+            variations[s] = ('del', i)
+        else:
+            #variations[s] += [('del', i)]
+            variations[s] = min(variations[s], ('del', i))
 
     # insertions
     for i in xrange(len(t)+1):
         for c in chars:
             s = t[:i] + c + t[i:]
             if not s in variations:
-                variations += [s]
+                #variations[s] = [('ins', i, c)]
+                variations[s] = ('ins', i, c)
+            else:
+                #variations[s] += [('ins', i, c)]
+                variations[s] = min(variations[s], ('ins', i, c))
 
     # substitutions
     for i in xrange(len(t)):
         for c in chars:
-            s = t[:i] + c + t[i+1:]
-            if not s in variations:
-                variations += [s]
+            if not c == t[i]:
+                s = t[:i] + c + t[i+1:]
+                if not s in variations:
+                    #variations[s] = [('sub', i, c)]
+                    variations[s] = ('sub', i, c)
+                else:
+                    #variations[s] += [('sub', i, c)]
+                    variations[s] += min(variations[s], ('sub', i, c))
 
     return variations
 

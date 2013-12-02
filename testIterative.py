@@ -2,17 +2,11 @@
 import bwt
 import random
 import time
+import iterativeUpdate as iu 
 
 ''' Compute the number of correctly matched substrands after the original strand is mutated '''
 
-# variable parameters
-genomeLen = 5000    # length of the reference genome
-numReads = 500      # number of reads to generate
-readLen = 50        # length of generated reads
-mutFreq = 0.02      # proportion of bases to mutate
-errors = 1          # number of errors to allow in matching
-
-def countCorrect(genomeLen, numReads, readLen, mutFreq, errors):
+def testIter(genomeLen, numReads, readLen, mutFreq, errors):
     # Initialize the reference gene
     t = ['$']
     for i in range(genomeLen):
@@ -57,35 +51,20 @@ def countCorrect(genomeLen, numReads, readLen, mutFreq, errors):
     for i in xrange(len(starts)):
         reads += [t2[starts[i]:starts[i]+readLen]]
 
-    # Match reads against t2
-    correct = 0
-    incorrect = 0
-    for i in range(numReads):
-        #print 'Read ' + str(i+1)
-        #print '  ' + ''.join(reads[i])
-        m = bwt.findApproximate(fm, b, alphabet, ''.join(reads[i]), errors)
-        found = False
-        #print 'Searching for ' + str(startsOrig[i])
-        #print m
-        #print ''.join(reads[i])
-        #print ''.join(t[starts[i]:starts[i]+readLen])
-        for j in xrange(-errors, errors+1):
-            if startsOrig[i]+j in m.keys() and not found:
-                #print 'Found!\n'
-                correct += 1
-                found = True
-        if not found:
-            #print 'Not found\n'
-            incorrect += 1
-    print '  Accuracy: ' + str(correct) + ' / ' + str(correct+incorrect) + ' = ' + str(float(correct)/(incorrect+correct))
-    return float(correct) / (incorrect+correct)
+    return iu.iterativeUpdate(fm, b, alphabet, reads, startsOrig, errors, 5)
 
+# default parameters
+genomeLen = 5000    # length of the reference genome
+numReads = 500      # number of reads to generate
+readLen = 50        # length of generated reads
+mutFreq = 0.02      # proportion of bases to mutate
+errors = 1          # number of errors to allow in matching
 
-for i in xrange(1,11):
-    readLen = 10*i
+for i in xrange(1,2):
+    readLen = 50*i
     print 'Read len: ' + str(readLen)
     numRuns = 5
     avgAccuracy = 0
     for run in xrange(numRuns):
-        avgAccuracy += countCorrect(genomeLen, numReads, readLen, mutFreq, errors)
+        avgAccuracy += testIter(genomeLen, numReads, readLen, mutFreq, errors)
     print '  Avg accuracy: ' + str(float(avgAccuracy) / numRuns)
