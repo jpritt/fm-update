@@ -1,0 +1,403 @@
+Read Len: 10
+  Run 0
+    Iter 1 - 495 correct, 2 incorrect, 3 unmatched, length = 95, size = 2237
+    Iter 2 - 495 correct, 2 incorrect, 3 unmatched, length = 0, size = 43
+    Iter 1 - 494 correct, 1 incorrect, 5 unmatched, length = 16, size = 400
+    Iter 2 - 494 correct, 1 incorrect, 5 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 498 correct, 1 incorrect, 1 unmatched, length = 86, size = 2054
+    Iter 2 - 498 correct, 1 incorrect, 1 unmatched, length = 0, size = 43
+    Iter 1 - 494 correct, 3 incorrect, 3 unmatched, length = 9, size = 244
+    Iter 2 - 494 correct, 3 incorrect, 3 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 496 correct, 0 incorrect, 4 unmatched, length = 100, size = 2349
+    Iter 2 - 497 correct, 0 incorrect, 3 unmatched, length = 1, size = 66
+    Iter 3 - 497 correct, 0 incorrect, 3 unmatched, length = 0, size = 43
+    Iter 1 - 497 correct, 0 incorrect, 3 unmatched, length = 15, size = 379
+    Iter 2 - 497 correct, 0 incorrect, 3 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 499 correct, 0 incorrect, 1 unmatched, length = 109, size = 2534
+    Iter 2 - 499 correct, 0 incorrect, 1 unmatched, length = 0, size = 43
+    Iter 1 - 495 correct, 3 incorrect, 2 unmatched, length = 19, size = 476
+    Iter 2 - 495 correct, 3 incorrect, 2 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 492 correct, 3 incorrect, 5 unmatched, length = 117, size = 2742
+    Iter 2 - 492 correct, 3 incorrect, 5 unmatched, length = 0, size = 43
+    Iter 1 - 495 correct, 1 incorrect, 4 unmatched, length = 6, size = 170
+    Iter 2 - 495 correct, 1 incorrect, 4 unmatched, length = 0, size = 43
+  Avg accuracy:     0.9924
+  Avg size:         2383.2
+  Avg accuracy red: 0.99
+  Avg size red:     333.8
+Read Len: 20
+  Run 0
+    Iter 1 - 480 correct, 0 incorrect, 20 unmatched, length = 109, size = 2574
+    Iter 2 - 482 correct, 0 incorrect, 18 unmatched, length = 2, size = 87
+    Iter 1 - 486 correct, 0 incorrect, 14 unmatched, length = 16, size = 399
+    Iter 2 - 488 correct, 0 incorrect, 12 unmatched, length = 0, size = 43
+    Iter 3 - 488 correct, 0 incorrect, 12 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 468 correct, 0 incorrect, 32 unmatched, length = 101, size = 2354
+    Iter 2 - 475 correct, 0 incorrect, 25 unmatched, length = 7, size = 195
+    Iter 3 - 475 correct, 0 incorrect, 25 unmatched, length = 0, size = 43
+    Iter 1 - 475 correct, 0 incorrect, 25 unmatched, length = 11, size = 283
+    Iter 2 - 476 correct, 0 incorrect, 24 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 486 correct, 0 incorrect, 14 unmatched, length = 96, size = 2254
+    Iter 2 - 487 correct, 0 incorrect, 13 unmatched, length = 2, size = 89
+    Iter 1 - 487 correct, 0 incorrect, 13 unmatched, length = 13, size = 324
+    Iter 2 - 488 correct, 0 incorrect, 12 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 475 correct, 0 incorrect, 25 unmatched, length = 140, size = 3346
+    Iter 2 - 477 correct, 0 incorrect, 23 unmatched, length = 3, size = 109
+    Iter 1 - 479 correct, 0 incorrect, 21 unmatched, length = 13, size = 334
+    Iter 2 - 479 correct, 0 incorrect, 21 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 478 correct, 0 incorrect, 22 unmatched, length = 95, size = 2221
+    Iter 2 - 480 correct, 0 incorrect, 20 unmatched, length = 3, size = 110
+    Iter 1 - 477 correct, 0 incorrect, 23 unmatched, length = 12, size = 305
+    Iter 2 - 478 correct, 0 incorrect, 22 unmatched, length = 0, size = 43
+  Avg accuracy:     0.9604
+  Avg size:         2549.8
+  Avg accuracy red: 0.9636
+  Avg size red:     329.0
+Read Len: 30
+  Run 0
+    Iter 1 - 449 correct, 0 incorrect, 51 unmatched, length = 134, size = 3182
+    Iter 2 - 450 correct, 0 incorrect, 50 unmatched, length = 1, size = 65
+    Iter 1 - 455 correct, 0 incorrect, 45 unmatched, length = 18, size = 455
+    Iter 2 - 455 correct, 0 incorrect, 45 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 460 correct, 0 incorrect, 40 unmatched, length = 131, size = 3087
+    Iter 2 - 467 correct, 0 incorrect, 33 unmatched, length = 6, size = 177
+    Iter 3 - 467 correct, 0 incorrect, 33 unmatched, length = 0, size = 43
+    Iter 1 - 464 correct, 0 incorrect, 36 unmatched, length = 19, size = 471
+    Iter 2 - 467 correct, 0 incorrect, 33 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 451 correct, 0 incorrect, 49 unmatched, length = 136, size = 3241
+    Iter 2 - 454 correct, 0 incorrect, 46 unmatched, length = 3, size = 110
+    Iter 1 - 468 correct, 0 incorrect, 32 unmatched, length = 21, size = 514
+    Iter 2 - 468 correct, 0 incorrect, 32 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 462 correct, 0 incorrect, 38 unmatched, length = 146, size = 3426
+    Iter 2 - 466 correct, 0 incorrect, 34 unmatched, length = 6, size = 170
+    Iter 3 - 466 correct, 0 incorrect, 34 unmatched, length = 0, size = 43
+    Iter 1 - 462 correct, 0 incorrect, 38 unmatched, length = 22, size = 532
+    Iter 2 - 468 correct, 0 incorrect, 32 unmatched, length = 1, size = 66
+    Iter 3 - 468 correct, 0 incorrect, 32 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 462 correct, 0 incorrect, 38 unmatched, length = 122, size = 2874
+    Iter 2 - 467 correct, 0 incorrect, 33 unmatched, length = 4, size = 134
+    Iter 3 - 468 correct, 0 incorrect, 32 unmatched, length = 1, size = 66
+    Iter 1 - 449 correct, 0 incorrect, 51 unmatched, length = 20, size = 507
+    Iter 2 - 451 correct, 0 incorrect, 49 unmatched, length = 0, size = 43
+  Avg accuracy:     0.922
+  Avg size:         3162.0
+  Avg accuracy red: 0.9236
+  Avg size red:     495.8
+Read Len: 40
+  Run 0
+    Iter 1 - 436 correct, 0 incorrect, 64 unmatched, length = 141, size = 3376
+    Iter 2 - 450 correct, 0 incorrect, 50 unmatched, length = 17, size = 431
+    Iter 3 - 452 correct, 0 incorrect, 48 unmatched, length = 2, size = 87
+    Iter 1 - 436 correct, 0 incorrect, 64 unmatched, length = 14, size = 354
+    Iter 2 - 439 correct, 0 incorrect, 61 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 434 correct, 0 incorrect, 66 unmatched, length = 133, size = 3151
+    Iter 2 - 441 correct, 0 incorrect, 59 unmatched, length = 9, size = 236
+    Iter 3 - 441 correct, 0 incorrect, 59 unmatched, length = 0, size = 43
+    Iter 1 - 442 correct, 0 incorrect, 58 unmatched, length = 19, size = 481
+    Iter 2 - 444 correct, 0 incorrect, 56 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 435 correct, 0 incorrect, 65 unmatched, length = 124, size = 2954
+    Iter 2 - 443 correct, 0 incorrect, 57 unmatched, length = 6, size = 172
+    Iter 3 - 445 correct, 0 incorrect, 55 unmatched, length = 1, size = 65
+    Iter 1 - 438 correct, 0 incorrect, 62 unmatched, length = 14, size = 364
+    Iter 2 - 440 correct, 0 incorrect, 60 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 425 correct, 0 incorrect, 75 unmatched, length = 113, size = 2694
+    Iter 2 - 427 correct, 0 incorrect, 73 unmatched, length = 3, size = 110
+    Iter 1 - 432 correct, 0 incorrect, 68 unmatched, length = 13, size = 328
+    Iter 2 - 434 correct, 0 incorrect, 66 unmatched, length = 1, size = 66
+  Run 4
+    Iter 1 - 428 correct, 0 incorrect, 72 unmatched, length = 123, size = 2942
+    Iter 2 - 428 correct, 0 incorrect, 72 unmatched, length = 0, size = 43
+    Iter 1 - 438 correct, 0 incorrect, 62 unmatched, length = 29, size = 706
+    Iter 2 - 447 correct, 0 incorrect, 53 unmatched, length = 0, size = 43
+    Iter 3 - 447 correct, 0 incorrect, 53 unmatched, length = 0, size = 43
+  Avg accuracy:     0.8772
+  Avg size:         3023.4
+  Avg accuracy red: 0.8816
+  Avg size red:     446.6
+Read Len: 50
+  Run 0
+    Iter 1 - 411 correct, 0 incorrect, 89 unmatched, length = 148, size = 3555
+    Iter 2 - 418 correct, 0 incorrect, 82 unmatched, length = 7, size = 198
+    Iter 1 - 409 correct, 0 incorrect, 91 unmatched, length = 15, size = 382
+    Iter 2 - 410 correct, 0 incorrect, 90 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 400 correct, 0 incorrect, 100 unmatched, length = 143, size = 3380
+    Iter 2 - 421 correct, 0 incorrect, 79 unmatched, length = 24, size = 592
+    Iter 3 - 428 correct, 0 incorrect, 72 unmatched, length = 2, size = 87
+    Iter 1 - 409 correct, 0 incorrect, 91 unmatched, length = 23, size = 554
+    Iter 2 - 411 correct, 0 incorrect, 89 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 419 correct, 0 incorrect, 81 unmatched, length = 128, size = 3058
+    Iter 2 - 426 correct, 0 incorrect, 74 unmatched, length = 7, size = 201
+    Iter 1 - 397 correct, 0 incorrect, 103 unmatched, length = 16, size = 408
+    Iter 2 - 397 correct, 0 incorrect, 103 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 395 correct, 0 incorrect, 105 unmatched, length = 131, size = 3101
+    Iter 2 - 424 correct, 0 incorrect, 76 unmatched, length = 28, size = 694
+    Iter 3 - 432 correct, 0 incorrect, 68 unmatched, length = 4, size = 134
+    Iter 4 - 433 correct, 0 incorrect, 67 unmatched, length = 1, size = 65
+    Iter 1 - 397 correct, 0 incorrect, 103 unmatched, length = 19, size = 467
+    Iter 2 - 402 correct, 0 incorrect, 98 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 419 correct, 0 incorrect, 81 unmatched, length = 137, size = 3269
+    Iter 2 - 429 correct, 0 incorrect, 71 unmatched, length = 7, size = 202
+    Iter 3 - 431 correct, 0 incorrect, 69 unmatched, length = 2, size = 82
+    Iter 1 - 398 correct, 0 incorrect, 102 unmatched, length = 22, size = 547
+    Iter 2 - 398 correct, 0 incorrect, 102 unmatched, length = 0, size = 43
+  Avg accuracy:     0.8544
+  Avg size:         3272.6
+  Avg accuracy red: 0.8072
+  Avg size red:     471.6
+Read Len: 60
+  Run 0
+    Iter 1 - 372 correct, 0 incorrect, 128 unmatched, length = 130, size = 3108
+    Iter 2 - 386 correct, 0 incorrect, 114 unmatched, length = 14, size = 366
+    Iter 3 - 386 correct, 0 incorrect, 114 unmatched, length = 0, size = 43
+    Iter 1 - 392 correct, 0 incorrect, 108 unmatched, length = 23, size = 548
+    Iter 2 - 393 correct, 0 incorrect, 107 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 372 correct, 0 incorrect, 128 unmatched, length = 135, size = 3237
+    Iter 2 - 376 correct, 0 incorrect, 124 unmatched, length = 2, size = 86
+    Iter 1 - 391 correct, 0 incorrect, 109 unmatched, length = 19, size = 467
+    Iter 2 - 395 correct, 0 incorrect, 105 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 367 correct, 0 incorrect, 133 unmatched, length = 127, size = 3026
+    Iter 2 - 381 correct, 0 incorrect, 119 unmatched, length = 16, size = 417
+    Iter 3 - 381 correct, 0 incorrect, 119 unmatched, length = 0, size = 43
+    Iter 1 - 362 correct, 0 incorrect, 138 unmatched, length = 16, size = 402
+    Iter 2 - 363 correct, 0 incorrect, 137 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 368 correct, 0 incorrect, 132 unmatched, length = 135, size = 3205
+    Iter 2 - 397 correct, 0 incorrect, 103 unmatched, length = 27, size = 665
+    Iter 3 - 398 correct, 0 incorrect, 102 unmatched, length = 1, size = 66
+    Iter 1 - 387 correct, 0 incorrect, 113 unmatched, length = 19, size = 463
+    Iter 2 - 387 correct, 0 incorrect, 113 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 361 correct, 0 incorrect, 139 unmatched, length = 129, size = 3060
+    Iter 2 - 377 correct, 0 incorrect, 123 unmatched, length = 12, size = 317
+    Iter 3 - 379 correct, 0 incorrect, 121 unmatched, length = 2, size = 89
+    Iter 1 - 360 correct, 0 incorrect, 140 unmatched, length = 19, size = 468
+    Iter 2 - 363 correct, 0 incorrect, 137 unmatched, length = 0, size = 43
+  Avg accuracy:     0.768
+  Avg size:         3127.2
+  Avg accuracy red: 0.7604
+  Avg size red:     469.6
+Read Len: 70
+  Run 0
+    Iter 1 - 374 correct, 0 incorrect, 126 unmatched, length = 124, size = 2922
+    Iter 2 - 398 correct, 0 incorrect, 102 unmatched, length = 22, size = 550
+    Iter 3 - 403 correct, 0 incorrect, 97 unmatched, length = 6, size = 181
+    Iter 1 - 356 correct, 0 incorrect, 144 unmatched, length = 15, size = 378
+    Iter 2 - 356 correct, 0 incorrect, 144 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 340 correct, 0 incorrect, 160 unmatched, length = 124, size = 2954
+    Iter 2 - 367 correct, 0 incorrect, 133 unmatched, length = 18, size = 463
+    Iter 3 - 367 correct, 0 incorrect, 133 unmatched, length = 0, size = 43
+    Iter 1 - 328 correct, 0 incorrect, 172 unmatched, length = 17, size = 419
+    Iter 2 - 334 correct, 0 incorrect, 166 unmatched, length = 1, size = 66
+  Run 2
+    Iter 1 - 336 correct, 0 incorrect, 164 unmatched, length = 125, size = 2986
+    Iter 2 - 364 correct, 0 incorrect, 136 unmatched, length = 27, size = 679
+    Iter 3 - 365 correct, 0 incorrect, 135 unmatched, length = 1, size = 65
+    Iter 1 - 325 correct, 0 incorrect, 175 unmatched, length = 16, size = 397
+    Iter 2 - 325 correct, 0 incorrect, 175 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 363 correct, 0 incorrect, 137 unmatched, length = 128, size = 3015
+    Iter 2 - 386 correct, 0 incorrect, 114 unmatched, length = 21, size = 524
+    Iter 3 - 388 correct, 0 incorrect, 112 unmatched, length = 2, size = 87
+    Iter 1 - 320 correct, 0 incorrect, 180 unmatched, length = 16, size = 408
+    Iter 2 - 325 correct, 0 incorrect, 175 unmatched, length = 1, size = 66
+  Run 4
+    Iter 1 - 356 correct, 0 incorrect, 144 unmatched, length = 127, size = 3012
+    Iter 2 - 371 correct, 0 incorrect, 129 unmatched, length = 16, size = 413
+    Iter 3 - 371 correct, 0 incorrect, 129 unmatched, length = 0, size = 43
+    Iter 1 - 339 correct, 0 incorrect, 161 unmatched, length = 17, size = 433
+    Iter 2 - 343 correct, 0 incorrect, 157 unmatched, length = 0, size = 43
+  Avg accuracy:     0.7576
+  Avg size:         2977.8
+  Avg accuracy red: 0.6732
+  Avg size red:     407.0
+Read Len: 80
+  Run 0
+    Iter 1 - 318 correct, 0 incorrect, 182 unmatched, length = 112, size = 2676
+    Iter 2 - 333 correct, 0 incorrect, 167 unmatched, length = 14, size = 355
+    Iter 1 - 329 correct, 0 incorrect, 171 unmatched, length = 20, size = 495
+    Iter 2 - 339 correct, 0 incorrect, 161 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 310 correct, 0 incorrect, 190 unmatched, length = 114, size = 2706
+    Iter 2 - 345 correct, 0 incorrect, 155 unmatched, length = 35, size = 857
+    Iter 3 - 345 correct, 0 incorrect, 155 unmatched, length = 0, size = 43
+    Iter 1 - 308 correct, 0 incorrect, 192 unmatched, length = 11, size = 292
+    Iter 2 - 310 correct, 0 incorrect, 190 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 315 correct, 0 incorrect, 185 unmatched, length = 119, size = 2834
+    Iter 2 - 342 correct, 0 incorrect, 158 unmatched, length = 24, size = 599
+    Iter 3 - 349 correct, 0 incorrect, 151 unmatched, length = 3, size = 111
+    Iter 1 - 317 correct, 0 incorrect, 183 unmatched, length = 25, size = 597
+    Iter 2 - 321 correct, 0 incorrect, 179 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 315 correct, 0 incorrect, 185 unmatched, length = 122, size = 2906
+    Iter 2 - 336 correct, 0 incorrect, 164 unmatched, length = 19, size = 479
+    Iter 3 - 336 correct, 0 incorrect, 164 unmatched, length = 0, size = 43
+    Iter 1 - 299 correct, 0 incorrect, 201 unmatched, length = 18, size = 444
+    Iter 2 - 302 correct, 0 incorrect, 198 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 307 correct, 0 incorrect, 193 unmatched, length = 116, size = 2780
+    Iter 2 - 321 correct, 0 incorrect, 179 unmatched, length = 12, size = 317
+    Iter 1 - 319 correct, 0 incorrect, 181 unmatched, length = 19, size = 447
+    Iter 2 - 319 correct, 0 incorrect, 181 unmatched, length = 0, size = 43
+  Avg accuracy:     0.6736
+  Avg size:         2780.4
+  Avg accuracy red: 0.6364
+  Avg size red:     455.0
+
+
+Num Reads: 500
+  Run 0
+    Iter 1 - 400 correct, 0 incorrect, 100 unmatched, length = 134, size = 3183
+    Iter 2 - 413 correct, 0 incorrect, 87 unmatched, length = 14, size = 366
+    Iter 3 - 413 correct, 0 incorrect, 87 unmatched, length = 0, size = 43
+    Iter 1 - 398 correct, 0 incorrect, 102 unmatched, length = 28, size = 684
+    Iter 2 - 405 correct, 0 incorrect, 95 unmatched, length = 1, size = 66
+  Run 1
+    Iter 1 - 399 correct, 0 incorrect, 101 unmatched, length = 127, size = 3004
+    Iter 2 - 417 correct, 0 incorrect, 83 unmatched, length = 16, size = 410
+    Iter 3 - 418 correct, 0 incorrect, 82 unmatched, length = 1, size = 66
+    Iter 1 - 408 correct, 0 incorrect, 92 unmatched, length = 18, size = 435
+    Iter 2 - 415 correct, 0 incorrect, 85 unmatched, length = 2, size = 89
+  Run 2
+    Iter 1 - 403 correct, 0 incorrect, 97 unmatched, length = 138, size = 3301
+    Iter 2 - 404 correct, 0 incorrect, 96 unmatched, length = 1, size = 65
+    Iter 1 - 392 correct, 0 incorrect, 108 unmatched, length = 16, size = 393
+    Iter 2 - 392 correct, 0 incorrect, 108 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 411 correct, 0 incorrect, 89 unmatched, length = 132, size = 3119
+    Iter 2 - 429 correct, 0 incorrect, 71 unmatched, length = 18, size = 462
+    Iter 3 - 429 correct, 0 incorrect, 71 unmatched, length = 0, size = 43
+    Iter 1 - 390 correct, 0 incorrect, 110 unmatched, length = 16, size = 412
+    Iter 2 - 392 correct, 0 incorrect, 108 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 411 correct, 0 incorrect, 89 unmatched, length = 122, size = 2866
+    Iter 2 - 418 correct, 0 incorrect, 82 unmatched, length = 7, size = 199
+    Iter 1 - 410 correct, 0 incorrect, 90 unmatched, length = 16, size = 412
+    Iter 2 - 410 correct, 0 incorrect, 90 unmatched, length = 0, size = 43
+  Avg accuracy:     0.8328
+  Avg size:         3094.6
+  Avg accuracy red: 0.8056
+  Avg size red:     467.2
+Num Reads: 1000
+  Run 0
+    Iter 1 - 805 correct, 0 incorrect, 195 unmatched, length = 237, size = 5701
+    Iter 2 - 854 correct, 0 incorrect, 146 unmatched, length = 44, size = 1072
+    Iter 3 - 857 correct, 0 incorrect, 143 unmatched, length = 3, size = 110
+    Iter 1 - 795 correct, 0 incorrect, 205 unmatched, length = 37, size = 872
+    Iter 2 - 798 correct, 0 incorrect, 202 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 789 correct, 0 incorrect, 211 unmatched, length = 244, size = 5877
+    Iter 2 - 837 correct, 0 incorrect, 163 unmatched, length = 43, size = 1042
+    Iter 3 - 840 correct, 0 incorrect, 160 unmatched, length = 3, size = 112
+    Iter 1 - 763 correct, 0 incorrect, 237 unmatched, length = 33, size = 793
+    Iter 2 - 763 correct, 0 incorrect, 237 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 785 correct, 0 incorrect, 215 unmatched, length = 223, size = 5401
+    Iter 2 - 821 correct, 0 incorrect, 179 unmatched, length = 28, size = 687
+    Iter 3 - 822 correct, 0 incorrect, 178 unmatched, length = 1, size = 66
+    Iter 1 - 800 correct, 0 incorrect, 200 unmatched, length = 38, size = 925
+    Iter 2 - 803 correct, 0 incorrect, 197 unmatched, length = 2, size = 87
+  Run 3
+    Iter 1 - 806 correct, 0 incorrect, 194 unmatched, length = 259, size = 6250
+    Iter 2 - 829 correct, 0 incorrect, 171 unmatched, length = 22, size = 544
+    Iter 3 - 830 correct, 0 incorrect, 170 unmatched, length = 1, size = 66
+    Iter 1 - 824 correct, 0 incorrect, 176 unmatched, length = 39, size = 927
+    Iter 2 - 825 correct, 0 incorrect, 175 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 794 correct, 0 incorrect, 206 unmatched, length = 226, size = 5489
+    Iter 2 - 838 correct, 0 incorrect, 162 unmatched, length = 33, size = 813
+    Iter 3 - 844 correct, 0 incorrect, 156 unmatched, length = 3, size = 111
+    Iter 1 - 789 correct, 0 incorrect, 211 unmatched, length = 34, size = 810
+    Iter 2 - 793 correct, 0 incorrect, 207 unmatched, length = 0, size = 43
+  Avg accuracy:     0.8386
+  Avg size:         5743.6
+  Avg accuracy red: 0.7964
+  Avg size red:     865.4
+Num Reads: 1500
+  Run 0
+    Iter 1 - 1202 correct, 0 incorrect, 298 unmatched, length = 324, size = 7898
+    Iter 2 - 1227 correct, 0 incorrect, 273 unmatched, length = 20, size = 512
+    Iter 1 - 1185 correct, 0 incorrect, 315 unmatched, length = 43, size = 1014
+    Iter 2 - 1190 correct, 0 incorrect, 310 unmatched, length = 1, size = 65
+  Run 1
+    Iter 1 - 1178 correct, 0 incorrect, 322 unmatched, length = 308, size = 7487
+    Iter 2 - 1213 correct, 0 incorrect, 287 unmatched, length = 23, size = 575
+    Iter 3 - 1216 correct, 0 incorrect, 284 unmatched, length = 3, size = 101
+    Iter 1 - 1195 correct, 0 incorrect, 305 unmatched, length = 45, size = 1049
+    Iter 2 - 1195 correct, 0 incorrect, 305 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 1184 correct, 0 incorrect, 316 unmatched, length = 346, size = 8437
+    Iter 2 - 1257 correct, 0 incorrect, 243 unmatched, length = 76, size = 1836
+    Iter 3 - 1259 correct, 0 incorrect, 241 unmatched, length = 2, size = 87
+    Iter 1 - 1185 correct, 1 incorrect, 314 unmatched, length = 48, size = 1161
+    Iter 2 - 1185 correct, 1 incorrect, 314 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 1211 correct, 0 incorrect, 289 unmatched, length = 314, size = 7586
+    Iter 2 - 1247 correct, 0 incorrect, 253 unmatched, length = 32, size = 782
+    Iter 3 - 1249 correct, 0 incorrect, 251 unmatched, length = 3, size = 109
+    Iter 1 - 1228 correct, 0 incorrect, 272 unmatched, length = 46, size = 1106
+    Iter 2 - 1231 correct, 0 incorrect, 269 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 1209 correct, 0 incorrect, 291 unmatched, length = 311, size = 7579
+    Iter 2 - 1231 correct, 0 incorrect, 269 unmatched, length = 23, size = 570
+    Iter 1 - 1207 correct, 0 incorrect, 293 unmatched, length = 52, size = 1218
+    Iter 2 - 1208 correct, 0 incorrect, 292 unmatched, length = 0, size = 43
+  Avg accuracy:     0.824266666667
+  Avg size:         7797.4
+  Avg accuracy red: 0.8012
+  Avg size red:     1109.6
+Num Reads: 2000
+  Run 0
+    Iter 1 - 1580 correct, 0 incorrect, 420 unmatched, length = 417, size = 10166
+    Iter 2 - 1685 correct, 0 incorrect, 315 unmatched, length = 80, size = 1927
+    Iter 3 - 1702 correct, 0 incorrect, 298 unmatched, length = 19, size = 472
+    Iter 1 - 1615 correct, 0 incorrect, 385 unmatched, length = 60, size = 1399
+    Iter 2 - 1615 correct, 0 incorrect, 385 unmatched, length = 0, size = 43
+  Run 1
+    Iter 1 - 1599 correct, 0 incorrect, 401 unmatched, length = 448, size = 10948
+    Iter 2 - 1626 correct, 0 incorrect, 374 unmatched, length = 28, size = 681
+    Iter 1 - 1628 correct, 0 incorrect, 372 unmatched, length = 63, size = 1504
+    Iter 2 - 1628 correct, 0 incorrect, 372 unmatched, length = 0, size = 43
+  Run 2
+    Iter 1 - 1616 correct, 0 incorrect, 384 unmatched, length = 414, size = 10086
+    Iter 2 - 1644 correct, 0 incorrect, 356 unmatched, length = 28, size = 690
+    Iter 1 - 1568 correct, 0 incorrect, 432 unmatched, length = 72, size = 1694
+    Iter 2 - 1568 correct, 0 incorrect, 432 unmatched, length = 0, size = 43
+  Run 3
+    Iter 1 - 1543 correct, 0 incorrect, 457 unmatched, length = 380, size = 9259
+    Iter 2 - 1712 correct, 0 incorrect, 288 unmatched, length = 133, size = 3230
+    Iter 3 - 1718 correct, 0 incorrect, 282 unmatched, length = 6, size = 176
+    Iter 1 - 1586 correct, 0 incorrect, 414 unmatched, length = 58, size = 1371
+    Iter 2 - 1586 correct, 0 incorrect, 414 unmatched, length = 0, size = 43
+  Run 4
+    Iter 1 - 1612 correct, 0 incorrect, 388 unmatched, length = 437, size = 10696
+    Iter 2 - 1661 correct, 0 incorrect, 339 unmatched, length = 34, size = 829
+    Iter 3 - 1667 correct, 0 incorrect, 333 unmatched, length = 6, size = 175
+    Iter 1 - 1621 correct, 0 incorrect, 379 unmatched, length = 54, size = 1272
+    Iter 2 - 1621 correct, 0 incorrect, 379 unmatched, length = 0, size = 43
+  Avg accuracy:     0.8357
+  Avg size:         10231.0
+  Avg accuracy red: 0.8018
+  Avg size red:     1448.0

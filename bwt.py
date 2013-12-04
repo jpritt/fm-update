@@ -441,26 +441,26 @@ def makeEdits(t):
     #variations += [t]
     chars = ['A', 'C', 'G', 'T']    
 
+    # 0 = substitution
+    # 1 = insertion
+    # 2 = deletion
+
     # deletions
     for i in xrange(len(t)):
         s = t[:i] + t[i+1:]
         if not s in variations:
-            #variations[s] = ('del', i)
-            variations[s] = ('ins', i, t[i])
+            variations[s] = (1, i, t[i])
         else:
-            #variations[s] = min(variations[s], ('del', i))
-            variations[s] = min(variations[s], ('ins', i, t[i]))
+            variations[s] = min(variations[s], (1, i, t[i]))
 
     # insertions
     for i in xrange(len(t)+1):
         for c in chars:
             s = t[:i] + c + t[i:]
             if not s in variations:
-                #variations[s] = ('ins', i, c)
-                variations[s] = ('del', i)
+                variations[s] = (2, i)
             else:
-                #variations[s] = min(variations[s], ('ins', i, c))
-                variations[s] = min(variations[s], ('del', i))
+                variations[s] = min(variations[s], (2, i))
 
     # substitutions
     for i in xrange(len(t)):
@@ -468,11 +468,9 @@ def makeEdits(t):
             if not c == t[i]:
                 s = t[:i] + c + t[i+1:]
                 if not s in variations:
-                    #variations[s] = ('sub', i, c)
-                    variations[s] = ('sub', i, t[i])
+                    variations[s] = (0, i, t[i])
                 else:
-                    #variations[s] += min(variations[s], ('sub', i, c))
-                    variations[s] += min(variations[s], ('sub', i, t[i]))
+                    variations[s] += min(variations[s], (0, i, t[i]))
 
     return variations
 
@@ -504,23 +502,23 @@ def editSeq(m, t1, t2):
         match = 0 if t2[x-1] == t1[y-1] else 1
         if m[x][y] == m[x-1][y-1] + match:
             if not t2[x-1] == t1[y-1]:
-                edits = [('sub', y-1, t2[x-1])] + edits
+                edits = [(0, y-1, t2[x-1])] + edits
             x -= 1
             y -= 1
         elif m[x][y] == m[x-1][y] + 1:
-            edits = [('ins', x-1, t2[x-1])] + edits
+            edits = [(1, x-1, t2[x-1])] + edits
             x -= 1
         else:
-            edits = [('del', y-1)] + edits
+            edits = [(2, y-1)] + edits
             y -= 1
 
     if y > 0:
         while y > 0:
-            edits = [('del', y-1)] + edits
+            edits = [(2, y-1)] + edits
             y -= 1
     else:
         while x > 0:
-            edits = [('ins', x, t2[x-1])] + edits
+            edits = [(1, x, t2[x-1])] + edits
             x -= 1
     return edits
 

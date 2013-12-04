@@ -2,21 +2,22 @@
 import bwt
 import random
 import time
+import sys
+import cPickle
 
 ''' Repeatedly match all possible reads to the genome, update, then repeat '''
 
-def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters, threshold=False, readLen=50, genomeLen=5000):
+def iterativeEM(fm, b, alphabet, reads, starts, errors, maxIters, readLen=50, genomeLen=5000, prop=1):
     unmatched = [1]*len(reads)
     numUnmatched = len(reads)
     prevSize = 2*len(reads)
     currIter = 0
 
-    firstIter = True
-    initialAcc = 0.0
+    sizes = []
     correct = 0
     incorrect = 0
     while numUnmatched > 0 and currIter < maxIters and float(prevSize - numUnmatched) / prevSize > 0.1:
-        threshold = 0.5 * numUnmatched * readLen / genomeLen
+        threshold = 0.25 * prop * numUnmatched * readLen / genomeLen
 
         currIter += 1
         prevSize = numUnmatched
@@ -31,16 +32,18 @@ def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters, threshold=
             
                 if len(m) > 0:
                     unmatched[i] = 0
-                    for k,edits in m.items():
-                        for v in edits:
-                            if v[0] == 2:
-                                vnew = (v[0],v[1]+k)
-                            else:
-                                vnew = (v[0],v[1]+k,v[2])
-                            if vnew in mutations:
-                                mutations[vnew] += 1
-                            else:
-                                mutations[vnew] = 1
+
+                    if i < prop*len(reads):
+                        for k,edits in m.items():
+                            for v in edits:
+                                if v[0] == 2:
+                                    vnew = (v[0],v[1]+k)
+                                else:
+                                    vnew = (v[0],v[1]+k,v[2])
+                                if vnew in mutations:
+                                    mutations[vnew] += 1
+                                else:
+                                    mutations[vnew] = 1
 
                     found = False
                     for j in xrange(-errors, errors+1):
@@ -50,9 +53,8 @@ def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters, threshold=
                     if not found:
                         incorrect += 1
 
-        if firstIter:
-            firstIter = False
-            initialAcc = float(correct) / len(reads)
+        mutationsString = cPickle.dumps(mutations)
+        sizes += [sys.getsizeof(mutationsString)]
 
         # apply mutations to fm index
         for k,v in mutations.items():
@@ -73,8 +75,8 @@ def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters, threshold=
                     print 'Error: k[0] = ' + str(k[0])
  
         numUnmatched = sum(unmatched)
-        print "    Iter " + str(currIter) + " - " + str(correct) + " correct, " + str(incorrect) + " incorrect, " + str(len(reads)-correct-incorrect) + ' unmatched'
+        #print "    Iter " + str(currIter) + " - " + str(correct) + " correct, " + str(incorrect) + " incorrect, " + str(len(reads)-correct-incorrect) + ' unmatched, length = ' + str(len(mutations)) + ', size = ' + str(sys.getsizeof(mutationsString))
 
 
     #print "    Accuracy: " + str(float(correct) / len(reads))
-    return initialAcc, float(correct) / len(reads)
+    return float(correct) / len(reads), sizes[0]

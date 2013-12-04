@@ -2,21 +2,25 @@
 import bwt
 import random
 import time
+import sys
+import cPickle
+import math
 
 ''' Repeatedly match all possible reads to the genome, update, then repeat '''
 
-def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters, threshold=False, readLen=50, genomeLen=5000):
+def iterativeEMDist(fm, b, alphabet, reads, starts, errors, maxIters, readLen=50, genomeLen=5000, depth=1, chunkSize=1):
     unmatched = [1]*len(reads)
     numUnmatched = len(reads)
     prevSize = 2*len(reads)
     currIter = 0
 
-    firstIter = True
-    initialAcc = 0.0
+    numChunks = int(math.ceil(float(genomeLen) / chunkSize))
+    sizes = []
     correct = 0
     incorrect = 0
     while numUnmatched > 0 and currIter < maxIters and float(prevSize - numUnmatched) / prevSize > 0.1:
-        threshold = 0.5 * numUnmatched * readLen / genomeLen
+        coverage = [0]*numChunks
+        threshold = 0.25 * depth
 
         currIter += 1
         prevSize = numUnmatched
@@ -31,17 +35,29 @@ def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters, threshold=
             
                 if len(m) > 0:
                     unmatched[i] = 0
-                    for k,edits in m.items():
-                        for v in edits:
-                            if v[0] == 2:
-                                vnew = (v[0],v[1]+k)
-                            else:
-                                vnew = (v[0],v[1]+k,v[2])
-                            if vnew in mutations:
-                                mutations[vnew] += 1
-                            else:
-                                mutations[vnew] = 1
 
+                    for k,edits in m.items():
+                        # Add mutations to list
+                        for v in edits:
+                            chunk = (v[1]+k) / chunkSize
+                            if coverage[chunk] < depth*chunkSize: 
+                                if v[0] == 2:
+                                    vnew = (v[0],v[1]+k)
+                                else:
+                                    vnew = (v[0],v[1]+k,v[2])
+                                if vnew in mutations:
+                                    mutations[vnew] += 1
+                                else:
+                                    mutations[vnew] = 1
+
+                        # Update coverage for matched reads
+                        chunk = k / chunkSize + 1
+                        while chunk*chunkSize < k+readLen:
+                            coverage[chunk-1] += chunk*chunkSize - max((chunk-1)*chunkSize, k)
+                            chunk += 1
+                        coverage[chunk-1] += min(chunk*chunkSize, k+readLen) - max((chunk-1)*chunkSize, k)
+
+                    # Test whether any of the matches are correct
                     found = False
                     for j in xrange(-errors, errors+1):
                         if starts[i]+j in m and not found:
@@ -50,9 +66,8 @@ def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters, threshold=
                     if not found:
                         incorrect += 1
 
-        if firstIter:
-            firstIter = False
-            initialAcc = float(correct) / len(reads)
+        mutationsString = cPickle.dumps(mutations)
+        sizes += [sys.getsizeof(mutationsString) + sys.getsizeof(coverage)]
 
         # apply mutations to fm index
         for k,v in mutations.items():
@@ -73,8 +88,8 @@ def iterativeUpdate(fm, b, alphabet, reads, starts, errors, maxIters, threshold=
                     print 'Error: k[0] = ' + str(k[0])
  
         numUnmatched = sum(unmatched)
-        print "    Iter " + str(currIter) + " - " + str(correct) + " correct, " + str(incorrect) + " incorrect, " + str(len(reads)-correct-incorrect) + ' unmatched'
+        #print "    Iter " + str(currIter) + " - " + str(correct) + " correct, " + str(incorrect) + " incorrect, " + str(len(reads)-correct-incorrect) + ' unmatched, length = ' + str(len(mutations)) + ', size = ' + str(sys.getsizeof(mutationsString))
 
 
     #print "    Accuracy: " + str(float(correct) / len(reads))
-    return initialAcc, float(correct) / len(reads)
+    return float(correct) / len(reads), sizes[0]

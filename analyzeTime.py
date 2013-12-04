@@ -13,9 +13,9 @@ print 'Size\t\tBuilt\t\t\tInsert\t\t\tDelete\t\t\tSubstitue\t\t\tAverage'
 for i in xrange(len(lengths)):
     buildTime = 0
     updateTimes = dict()
-    updateTimes['ins'] = 0
-    updateTimes['del'] = 0
-    updateTimes['sub'] = 0
+    updateTimes[1] = 0
+    updateTimes[2] = 0
+    updateTimes[0] = 0
 
     length = lengths[i]
     numRuns = runLens[i]
@@ -46,7 +46,7 @@ for i in xrange(len(lengths)):
         fm_new = bwt.substitute(fm, b, alphabet, subId, newChar)
         timeUpdate = time.time() - startUpdate
 
-        updateTimes['sub'] += timeUpdate
+        updateTimes[0] += timeUpdate
 
 
         # Insertion of a character
@@ -58,7 +58,7 @@ for i in xrange(len(lengths)):
         fm_new = bwt.insert(fm, b, alphabet, insertId, newChar)
         timeUpdate = time.time() - startUpdate
 
-        updateTimes['ins'] += timeUpdate
+        updateTimes[1] += timeUpdate
 
 
         # Deletion of a character
@@ -69,11 +69,11 @@ for i in xrange(len(lengths)):
         fm_new = bwt.delete(fm, b, alphabet, deleteId)
         timeUpdate = time.time() - startUpdate
 
-        updateTimes['del'] += timeUpdate
+        updateTimes[2] += timeUpdate
 
     buildTime /= numRuns
     for k in updateTimes.keys():
         updateTimes[k] /= numRuns
 
-    print str(length) + '(Update)\t' + str(buildTime) + '\t' + str(updateTimes['ins']) + '\t' + str(updateTimes['del']) + '\t' + str(updateTimes['sub']) + '\t' + str((updateTimes['ins']+updateTimes['del']+updateTimes['sub'])/3)
+    print str(length) + '(Update)\t' + str(buildTime) + '\t' + str(updateTimes[1]) + '\t' + str(updateTimes[2]) + '\t' + str(updateTimes[0]) + '\t' + str((updateTimes[1]+updateTimes[2]+updateTimes[0])/3)
 

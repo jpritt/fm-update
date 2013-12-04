@@ -1,0 +1,31 @@
+Read Len: 10
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.9916	0.9916	0.9912		0.9916		0.9916
+  Size:	2446.2	251.4	41575.6		42176.4		3305.4
+Read Len: 20
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.972	0.9704	0.9724		0.9748		0.9724
+  Size:	2550.2	383.2	41446.2		42077.8		3190.0
+Read Len: 30
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.924	0.9172	0.9292		0.9248		0.9244
+  Size:	2965.4	472.0	41535.4		42162.6		3182.8
+Read Len: 40
+  Run 0
+  Run 1
+  Run 2

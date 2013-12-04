@@ -2,12 +2,12 @@
 import bwt
 import random
 import time
-import iterativeUpdate as iu 
+import iterativeUpdateError as iu 
 import sys
 
 ''' Compute the number of correctly matched substrands after the original strand is mutated '''
 
-def testIter(genomeLen, numReads, readLen, mutFreq, errors):
+def testIter(genomeLen, numReads, readLen, mutFreq, errors, errorFreq):
     # Initialize the reference gene
     t = ['$']
     for i in range(genomeLen):
@@ -27,7 +27,7 @@ def testIter(genomeLen, numReads, readLen, mutFreq, errors):
     # mutate the reference genome to get new genome
     t2 = t[:]
     for i in range(int(round(mutFreq*genomeLen))):
-        base = random.randint(0, len(t2)-1)
+        base = random.randint(2*readLen, len(t2)-2*readLen)
 
         mutType = random.randint(0,2)
         # substitution
@@ -52,65 +52,54 @@ def testIter(genomeLen, numReads, readLen, mutFreq, errors):
     reads = []
     for i in xrange(len(starts)):
         reads += [t2[starts[i]:starts[i]+readLen]]
+ 
+        # introduce substitution errors with 1% chance at each base
+        for j in xrange(readLen):
+            if random.random() < errorFreq:
+                reads[i][j] = random.choice(['A', 'C', 'T', 'G'])
 
-    return iu.iterativeUpdate(fm, b, alphabet, reads, startsOrig, errors, 5)
+    return iu.iterativeUpdateError(fm, b, alphabet, reads, startsOrig, errors, 5, True, readLen, genomeLen)
 
 # default parameters
 genomeLen = 5000    # length of the reference genome
 numReads = 500      # number of reads to generate
 readLen = 50        # length of generated reads
-mutFreq = 0.02      # proportion of bases to mutate
+mutFreq = 0.01      # proportion of bases to mutate
 errors = 1          # number of errors to allow in matching
+errorFreq = 0.01
 
 '''
-for i in xrange(1,11):
-    readLen = 10*i
-    print 'Read len: ' + str(readLen)
+for i in xrange(1,6):
+    numReads = 500*i
+    print 'Num reads: ' + str(numReads)
     numRuns = 5
-    avgInit = 0
-    avgIter = 0
+    avgAccuracy = 0
+    avgSize = 0
     for run in xrange(numRuns):
         print '  Run ' + str(run)
-        initAcc, iterAcc = testIter(genomeLen, numReads, readLen, mutFreq, errors)
-        avgInit += initAcc
-        avgIter += iterAcc
-    print '  Avg naive accuracy:     ' + str(float(avgInit) / numRuns)
-    print '  Avg iterative accuracy: ' + str(float(avgIter) / numRuns)
+        accuracy, sizes = testIter(genomeLen, numReads, readLen, mutFreq, errors, errorFreq)
+        avgAccuracy += accuracy
+        avgSize += sizes[0]
+    print '  Avg accuracy: ' + str(float(avgAccuracy) / numRuns)
+    print '  Avg size:     ' + str(float(avgSize) / numRuns)
     sys.stdout.flush()
 print '\n'
 '''
 
-'''
-readLen = 50
-for i in xrange(6,11):
-    mutFreq = 0.01*i
-    print 'Mutation freq: ' + str(mutFreq)
+numReads = 1000
+for i in xrange(11):
+    errorFreq = 0.005*i
+    print 'Error freq: ' + str(errorFreq)
     numRuns = 5
-    avgInit = 0
-    avgIter = 0
+    avgAccuracy = 0
+    avgSize = 0
     for run in xrange(numRuns):
         print '  Run ' + str(run)
-        initAcc, iterAcc = testIter(genomeLen, numReads, readLen, mutFreq, errors)
-        avgInit += initAcc
-        avgIter += iterAcc
-    print '  Avg naive accuracy:     ' + str(float(avgInit) / numRuns)
-    print '  Avg iterative accuracy: ' + str(float(avgIter) / numRuns)
+        accuracy, sizes = testIter(genomeLen, numReads, readLen, mutFreq, errors, errorFreq)
+        avgAccuracy += accuracy
+        avgSize += sizes[0]
+    print '  Avg accuracy: ' + str(float(avgAccuracy) / numRuns)
+    print '  Avg size:     ' + str(float(avgSize) / numRuns)
     sys.stdout.flush()
 print '\n'
-'''
 
-mutFreq = 0.01
-numReadsVals = [1000, 1500, 2000]
-for numReads in numReadsVals:
-    print 'Num Reads: ' + str(numReads)
-    numRuns = 5
-    avgInit = 0
-    avgIter = 0
-    for run in xrange(numRuns):
-        print '  Run ' + str(run)
-        initAcc, iterAcc = testIter(genomeLen, numReads, readLen, mutFreq, errors)
-        avgInit += initAcc
-        avgIter += iterAcc
-    print '  Avg naive accuracy:     ' + str(float(avgInit) / numRuns)
-    print '  Avg iterative accuracy: ' + str(float(avgIter) / numRuns)
-    sys.stdout.flush()
