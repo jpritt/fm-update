@@ -1,0 +1,77 @@
+Error freq: 0.02
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.7002	0.692	0.6954		0.6886
+  Size:	7183.0	920.6	3675.2		3100.2
+Error freq: 0.025
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.6476	0.6192	0.6362		0.6324
+  Size:	7452.6	867.6	3767.6		3301.2
+
+
+Read Len: 10
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.9914	0.9912	0.9908		0.9908
+  Size:	4089.2	473.0	4344.4		3967.4
+Read Len: 20
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.9638	0.9612	0.966		0.9672
+  Size:	4591.8	625.2	3518.2		3067.8
+Read Len: 30
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.9218	0.9144	0.9202		0.9182
+  Size:	5403.6	812.4	3459.0		2932.2
+Read Len: 40
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.8862	0.8742	0.8804		0.879
+  Size:	5287.4	741.0	2989.6		2428.8
+Read Len: 50
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.827	0.8266	0.8232		0.828
+  Size:	5776.2	879.8	2951.8		2419.4
+Read Len: 60
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.783	0.7666	0.7774		0.779
+  Size:	5282.0	797.2	2684.4		2212.0
+Read Len: 70
+  Run 0
+  Run 1

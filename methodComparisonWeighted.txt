@@ -1,0 +1,38 @@
+Error freq: 0.0
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.9402	0.9228	0.9316		0.9334
+  Size:	1430.0	502.2	1900.2		1389.2
+Error freq: 0.005
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.9004	0.8828	0.8982		0.892
+  Size:	3879.0	716.8	2441.2		2007.2
+Error freq: 0.01
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.8478	0.8158	0.8444		0.8362
+  Size:	5494.8	830.6	2899.2		2457.8
+Error freq: 0.015
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Chunk=50	Chunk=100
+  Acc:	0.7782	0.7576	0.7712		0.7728
+  Size:	6292.6	956.8	3362.8		2805.0
+Error freq: 0.02
+  Run 0

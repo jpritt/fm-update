@@ -18,9 +18,6 @@ def bwm(t):
  
     bwm = [x for (x,_) in sort]
     sa = [y for (_,y) in sort]
-    #sa = dict()
-    #for i in xrange(0, len(sort), a):
-    #    sa[i] = sort[i][1]
   
     return sorted(rotations(t)), sa
 
@@ -63,35 +60,6 @@ def reverseBwt(bw):
         rowi = first[c][0] + ranks[rowi]
     return t
 
-
-#def getSAIndex(fm, i, a, alphabet):
-#    (first, last, sa, checkpoints) = fm
-#    ''' Returns the index in the full SA of the given index i in the bw transform, using the given subsampled SA '''
-#    if i in sa:
-#        return sa[i]
-#    else:
-#        newi = first[last[i]][0] + getCount(last, i, checkpoints, b, alphabet)
-#        return (1 + getSAIndex(fm, newi, a, alphabet)) % len(last)
-#
-#def getRowBySA(fm, index, alphabet):
-#    ''' Return the row  in the bwt with the given SA value '''
-#    (first, last, sa, checkpoints) = fm
-#
-#    minK = 0
-#    minDiff = len(last)
-#    for k,v in sa.items():
-#        if v == index:
-#            return k
-#        elif (v-index) > 0 and (v-index) < minDiff:
-#            minK = k
-#            minDiff = v-index
-#
-#    row = minK
-#    for i in range(minDiff):
-#       row = LF(fm, row)
-#    return row
-
-
 def getCheckpoints(bw, b, alphabet):
     ''' Returns counts of each letter at every b positions in the bw string '''
     counts = dict()
@@ -127,6 +95,7 @@ def getCount(bw, i, checkpoints, b, alphabet):
         return count
 
 def findRange(fm, b, alphabet, substring, start, end):
+    ''' Find the location of substring in the fm index between b-values start and end '''
     (first, last, sa, checkpoints) = fm
     alphabet = sorted(first.keys())
 
@@ -156,8 +125,14 @@ def findRange(fm, b, alphabet, substring, start, end):
             else:
                 return findRange(fm, b, alphabet, substring[:-1], int(minId), int(maxId)+1)
 
+def find(fm, b, alphabet, substring):
+    ''' Find all indexes of the substring in the text represented in bw '''
+    first = fm[0]
+    (minI, maxI) = first[substring[-1]]
+    return findRange(fm, b, alphabet, substring, 0, maxI-minI)
+
 def moveRow(fm, b, alphabet, i, j):
-    ''' Moves the row from i to j, shifting all rows in-between and updates SA and checkpoints '''
+    ''' Moves the row at index i in the bwt to index j, shifting all rows in-between and updates SA and checkpoints '''
     (first, last, sa, checkpoints) = fm
     if i > j:
         last = last[:j] + [last[i]] + last[j:i] + last[i+1:]
@@ -182,12 +157,6 @@ def moveRow(fm, b, alphabet, i, j):
             checkpoints[(x+1) / b - 1][indexRemoved] -= 1
             checkpoints[(x+1) / b - 1][alphabet.index(last[x])] += 1
     return (first, last, sa, checkpoints)
-
-def find(fm, b, alphabet, substring):
-    ''' Find all indexes of the substring in the text represented in bw '''
-    first = fm[0]
-    (minI, maxI) = first[substring[-1]]
-    return findRange(fm, b, alphabet, substring, 0, maxI-minI)
 
 def insert(fm, b, alphabet, index, c):
     ''' Update the BWT for an insertion of character c into position index in the original string '''
@@ -371,33 +340,12 @@ def LF(fm, b, alphabet, index):
     return (first[c][0] + getCount(last, index, checkpoints, b, alphabet)) % len(last)
 
 def constructFM(t, b, alphabet):
+    ''' Construct an FM-index for string t, with checkpoints every b rows and the predefined alphabet'''
     last, sa = bwtViaBwm(t)
     _, tots = rankBwt(last)
     first = firstCol(tots)
     checkpoints = getCheckpoints(last, b, alphabet)
     return (first, last, sa, checkpoints)
-
-def findApproximatePigeonhole(fm, t, b, alphabet, substring, k):
-    ''' Uses the pigeonhole principle to find all matches of the substring to the fm index with at most k errors '''
-    matches = []
-
-    # Pigeonhole principle
-    if k == 0:
-        matches = find(fm, b, alphabet, substring)
-        return [(m, []) for m in matches]
-    else:
-        fragLen = len(substring) / (k+1)
-        for i in xrange(k+1):
-            tsub = substring[len(substring)*i/(k+1) : len(substring)*(i+1)/(k+1)]
-            print 'Searching for ' + tsub
-            subMatches = find(fm, b, alphabet, tsub)
-
-            for m in subMatches:
-                start = m - len(substring)*i/k
-                edits = editDistance(t[start:start+len(substring)], substring)
-                if len(edits) <= k:
-                    matches.append((m, edits))
-        return matches
 
 def findApproximate(fm, b, alphabet, substring, k):
     ''' Find all approximate matches to the fm index by making all possible mutated strings and searching for exact matches '''
@@ -523,85 +471,3 @@ def editSeq(m, t1, t2):
     return edits
 
 
-
-
-'''  
-t = 'TTAGCCAATGGAATGGAAGCCGAT$'
-query1 = 'AGCC'
-query2 = 'AAT'
-query3 = 'ACTGG'
-alphabet = sorted(set(t))
-
-b = 4
-last, sa = bwtViaBwm(t)
-_, tots = rankBwt(last)
-first = firstCol(tots)
-checkpoints = getCheckpoints(last, b)
-fm = (first, last, sa, checkpoints)
-
-print 'T = ' + t
-print 'Searching for: ' + query1
-matches = find(fm, b, query1)
-print matches
-
-print 'Searching for: ' + query2
-matches = find(fm, b, query2)
-print matches
-
-print 'Searching for: ' + query3
-matches = find(fm, b, query3)
-print matches
-
-
-
-t2 = 'TTAGCCAACTGGAATGGAAGCCGAT$'
-
-last2, sa2 = bwtViaBwm(t2)
-_, tots2 = rankBwt(last2)
-first2 = firstCol(tots2)
-checkpoints2 = getCheckpoints(last2, b)
-fm2 = (first2, last2, sa2, checkpoints2)
-
-print 'T = ' + t2
-print 'Searching for: ' + query1
-matches = find(fm2, b, query1)
-print matches
-
-print 'Searching for: ' + query2
-matches = find(fm2, b, query2)
-print matches
-
-print 'Searching for: ' + query3
-matches = find(fm2, b, query3)
-print matches
-
-
-print '\nUpdating initial index'
-fm_updated = insert(fm, 8, 'C')
-print 'T = ' + t2
-print 'Searching for: ' + query1
-matches = find(fm_updated, b, query1)
-print matches
-
-print 'Searching for: ' + query2
-matches = find(fm_updated, b, query2)
-print matches
-
-print 'Searching for: ' + query3
-matches = find(fm_updated, b, query3)
-print matches
-
-
-(first, last, sa, checkpoints) = fm_updated
-for i in xrange(len(last)):
-    for c in alphabet:
-        if i >= first[c][0] and i < first[c][1]:
-            print c + '\t' + last[i] + '\t' + str(sa[i]) + '\t' + str(getCount(last, i, checkpoints, b))
-
-print '\n'
-(first, last, sa, checkpoints) = fm2
-for i in xrange(len(last)):
-    for c in alphabet:
-        if i >= first[c][0] and i < first[c][1]:
-            print c + '\t' + last[i] + '\t' + str(sa[i]) + '\t' + str(getCount(last, i, checkpoints, b))
-'''

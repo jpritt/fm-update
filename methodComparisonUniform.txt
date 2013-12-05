@@ -29,3 +29,107 @@ Read Len: 40
   Run 0
   Run 1
   Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.8672	0.866	0.8776		0.87		0.8728
+  Size:	3065.6	449.6	41398.6		41911.6		2905.0
+Read Len: 50
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.8388	0.8272	0.8316		0.8356		0.8432
+  Size:	3430.6	479.6	41383.6		41914.8		2918.2
+Read Len: 60
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.7836	0.7656	0.8012		0.7904		0.7884
+  Size:	3078.6	392.0	41180.0		41630.0		2600.0
+Read Len: 70
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.7212	0.7092	0.7224		0.722		0.7212
+  Size:	2964.4	429.0	41139.4		41550.2		2475.6
+Read Len: 80
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.6792	0.6368	0.6608		0.6644		0.6604
+  Size:	2805.6	376.8	41044.2		41409.8		2372.8
+
+
+Num Reads: 500
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.8204	0.8044	0.8236		0.8132		0.8076
+  Size:	2990.0	467.6	41316.2		41813.6		2802.0
+Num Reads: 1000
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.847	0.8248	0.8386		0.8274		0.83
+  Size:	5578.6	849.2	41429.0		42051.2		2924.4
+Num Reads: 1500
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.8492	0.831066666667	0.850133333333		0.8452		0.834533333333
+  Size:	7974.6	1092.2	41508.2		42045.0		2925.6
+Num Reads: 2000
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.8464	0.8341	0.8422		0.8377		0.8415
+  Size:	10333.4	1411.8	41413.6		42048.4		2912.6
+Num Reads: 2500
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.82312	0.81488	0.8372		0.8324		0.82776
+  Size:	12569.6	1814.6	41545.8		42113.2		2998.2
+
+
+Error freq: 0.0
+  Run 0
+  Run 1
+  Run 2
+  Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.943	0.944	0.9462		0.946		0.9472
+  Size:	1446.8	512.4	41080.6		41144.8		1910.0
+Error freq: 0.005
+  Run 0
+  Run 1
+  Run 2
+  Run 3
