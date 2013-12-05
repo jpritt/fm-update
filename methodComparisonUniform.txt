@@ -133,3 +133,9 @@ Error freq: 0.005
   Run 1
   Run 2
   Run 3
+  Run 4
+	Orig	Reduced	Dist Depth=1	Dist Depth=2	Chunk Depth=2
+  Acc:	0.8916	0.88	0.893		0.89		0.8876
+  Size:	3793.2	778.6	41294.4		41620.2		2537.2
+Error freq: 0.01
+  Run 0
